@@ -1,0 +1,11 @@
+extends ../layouts/common
+
+block content
+    h2 Create new user
+    form(method="PUT", action="/users/edit/"+user.id)
+      label(id="name")
+      input(type="text", placeholder="Your name", name="name", value=user.name)
+
+      label(id="age")
+      input(type="text", placeholder="Your age", name="age", value=user.age)
+      input(type="submit")

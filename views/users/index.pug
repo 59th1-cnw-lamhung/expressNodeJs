@@ -1,0 +1,44 @@
+extends ../layouts/common
+
+block content
+  .d-flex.align-items-center
+    a.btn.btn-dark(href="/users/create") New
+    
+    form.ml-auto(action="/users/search", class="d-flex")
+      input(name="q", type="text", placeholder="......", class="form-control", width='50%')
+      button.btn.btn-dark(type='submit') Search
+
+  .users 
+    h4 List User
+    if users.length > 0
+      table.table
+        thead.thead-light
+          tr
+            th(scope='col')  Email
+            th(scope='col')  Password
+            th(scope='col')  Name 
+            th(scope='col')  Age 
+            th(scope='col')  Detail
+            th(scope='col')  Edit
+            th(scope='col')  Delete
+        tbody
+          each user in users
+            tr
+              td=  user.email
+              td=  user.password 
+              td=  user.name
+              td=  user.age
+
+              td
+                a(href='/users/detail/'+user.id) View
+              td
+                a(href='/users/edit/'+user.id) Edit
+              td
+                a(href='/users/delete/'+user.id) Delete
+    else
+      p No user to display 
+
+
+        
+
+
