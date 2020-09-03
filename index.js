@@ -7,11 +7,14 @@ var cookieParser = require('cookie-parser');
 var pug = require('pug');
 
 var bodyParser = require('body-parser');
+
 var app = express();// manager
 
 var userRouter = require('./routes/user_router')
 
 var authRouter = require('./routes/auth_router')
+
+var productRouter = require('./routes/product_router')
 
 var authMiddleware = require('./middlewares/auth_middleware')
 
@@ -36,6 +39,9 @@ app.get('/', function(req, res) {
 
 
 app.use('/users', authMiddleware.requireAuth, userRouter);
+
+app.use('/products', productRouter);
+
 app.use('/auth', authRouter);
 
 
