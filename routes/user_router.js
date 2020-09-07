@@ -1,11 +1,16 @@
 var express = require('express');
 
+var multer  = require('multer');
 
 var controller = require('../controllers/user_controller');
 
 var validate = require('../validate/user_validate');
 
-var authMiddleware = require('../middlewares/auth_middleware')
+var authMiddleware = require('../middlewares/auth_middleware');
+
+
+
+var upload = multer({ dest: './public/uploads/' })
 
 var router = express.Router();
 
@@ -23,7 +28,7 @@ router.get('/create', controller.create);
 
 router.get('/detail/:userid', controller.getId);
 
-router.post('/create', validate.postCreate, controller.postCreate);
+router.post('/create', upload.single('avatar'), validate.postCreate, controller.postCreate);
 
 router.get('/edit/:editid', controller.editGetId);
 

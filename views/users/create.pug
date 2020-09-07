@@ -14,7 +14,7 @@ block content
     //-   input(type="text", placeholder="Your age", name="age")
     //-   input(type="submit")
 
-    form(action="/users/create" method="POST")
+    form(action="/users/create", method="POST", enctype="multipart/form-data")
       .form-group
         label(for='Email') Email
         input#Email.form-control(name='email', type="text", value=values ? values.email : '')
@@ -30,5 +30,9 @@ block content
       .form-group
         label(for='Age') Age
         input#Age.form-control(type="number", name="age", value=values ? values.age : '')
+
+      .form-group
+        label(for='Avatar') Avatar
+        input#Avatar.form-control-file(name="avatar", type="file")
       
       button.btn.btn-primary(type='submit') Create    

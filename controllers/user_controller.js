@@ -36,16 +36,17 @@ module.exports.getId = function(req, res){
 module.exports.postCreate = function(req, res) {
    //req.body.id = shortid.generate();
 
-  req.body = {
-      "email": req.body.email,
-      "password": md5(req.body.password),
-      "name": req.body.name,
-      "age": req.body.age,
-      "id": shortid.generate(),
+  var data = {
+      email: req.body.email,
+      password: md5(req.body.password),
+      name: req.body.name,
+      age: req.body.age,
+      avatar: req.file.path.split('\\').slice(1).join('/'),
+      id: shortid.generate(),
       
   };
-  console.log(req.body)
-  db.get('users').push(req.body).write();
+  //console.log(data);
+  db.get('users').push(data).write();
   res.redirect('/users')
 }
 
