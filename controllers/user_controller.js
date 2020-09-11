@@ -1,6 +1,50 @@
+var db = require('../db');
 var shortid = require('shortid');
 var md5 = require('md5');
-var db = require('../db');
+
+
+//var User = require('../models/user_model');
+
+/*module.exports.create = function(req, res) {
+  if (!req.body.email || !req.body.password || !req.body.name) {
+      return res.status(400).send({
+      message: "Required field can not be empty",
+    });
+  }
+
+  const user = new User({
+    email: req.body.email,
+    //password: bcrypt.hashSync(req.body.password, 10),
+    password: md5(req.body.password),
+    name: req.body.name,
+    age: req.body.age,
+    avatar: req.body.gender,
+    id: shortid.generate(),
+  });
+
+  user
+    .save()
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "Some error occurred while creating the User.",
+      });
+    });
+}
+
+
+module.exports.index = async function(req, res) {
+    
+
+    var users = await Product.find();
+
+    res.render('users/index', {
+        users: users
+    });
+}*/
+
 
 module.exports.index = function(req, res) {
     res.render('users/index', {
@@ -42,7 +86,7 @@ module.exports.postCreate = function(req, res) {
       name: req.body.name,
       age: req.body.age,
       avatar: req.file.path.split('\\').slice(1).join('/'),
-      id: shortid.generate(),
+      id: shortid.generate()
       
   };
   //console.log(data);

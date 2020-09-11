@@ -14,11 +14,11 @@ module.exports = function(req, res, next) {
    }).write();
   }
 
-  var a = db.get("sessions").find({ id: req.signedCookies.sessionId }).get("cart").size().value();
+  /*var a = db.get("sessions").find({ id: req.signedCookies.sessionId }).get("cart").size().value();
 
   res.locals.countCart = a;
 
-  console.log(a);
+  console.log(a);*/
 
 	next();
 }

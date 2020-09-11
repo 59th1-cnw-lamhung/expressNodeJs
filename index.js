@@ -2,17 +2,20 @@ require('dotenv').config();
 
 var express = require('express');// manager
 
+var bodyParser = require('body-parser');
+
 var cookieParser = require('cookie-parser');
 
 var csurf = require('csurf');
 
+
 var mongoose = require('mongoose');
 
-mongoose.connect('process.env.MONGO_URL');
+mongoose.connect(process.env.MONGO_URL);
 
 var pug = require('pug');
 
-var bodyParser = require('body-parser');
+
 
 var app = express();// manager
 
@@ -26,6 +29,8 @@ var cartRouter = require('./routes/cart_router');
 
 var transferRouter = require('./routes/transfer_router');
 
+
+var apiProductRoute = require('./api/routes/api_product_router');
 
 var authMiddleware = require('./middlewares/auth_middleware');
 
@@ -42,11 +47,13 @@ app.set('views', './views');
 app.use(bodyParser.json()) // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.use(cookieParser('process.env.SESSION_SECRET')); // Signed Cookie: tăng tính bảo mật, chống truy cập bất hợp pháp
+app.use('/api/products', apiProductRoute);
+
+app.use(cookieParser(process.env.SESSION_SECRET)); // Signed Cookie: tăng tính bảo mật, chống truy cập bất hợp pháp
 
 app.use(sessionMiddleware);
 
-app.use(csurf({cookie: true}));
+//app.use(csurf({cookie: true}));
 
 app.use(express.static('public'));
 

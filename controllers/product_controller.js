@@ -1,8 +1,8 @@
 
-var db = require('../db');
-
-module.exports.index = function(req, res) {
-  var page = parseInt(req.query.page) || 1;
+var Product = require('../models/product_model');
+//var db = require('../db');
+module.exports.index = async function(req, res, next) {
+  /*var page = parseInt(req.query.page) || 1;
   var perPage = 8;
   var start = (page - 1) * perPage;
   var end = page * perPage;
@@ -26,7 +26,21 @@ module.exports.index = function(req, res) {
       page: page,
       totalPages: arr,
       lastPage: totalproduct
-  });
+  });*/
+
+  try{
+    var products = await Product.find();
+    //product.hung();
+    res.render('products/index', {
+          products: products
+    });
+  } catch(error){
+    next(error);
+  }
+
+  
+
+
 
 /*
 
